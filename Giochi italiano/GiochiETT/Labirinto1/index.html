@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Labirinto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="stile.css">
+    <script src="MyFunction.js"></script>
+    <script>
+        labirinto = new Array();
+        
+        labirinto[0] =   new Array(new Cella("NO"), new Cella("N"), new Cella("N"), 
+                    new Cella("NE"), new Cella("NO"), new Cella("NE"), 
+                    new Cella("NO"), new Cella("NE"), new Cella("NO"), 
+                    new Cella("NS"), new Cella("NE"), new Cella("NO"), 
+                    new Cella("NS"), new Cella("N"), new Cella("NS"), 
+                    new Cella("N"), new Cella("NES"), new Cella("NO"), 
+                    new Cella("NS"), new Cella("NS"), new Cella("NS"),
+                    new Cella("NE"), new Cella("NO"), new Cella("NE"));
+
+        labirinto[1] =   new Array(new Cella("O"), new Cella(""), new Cella(""), 
+                    new Cella("E"), new Cella("EO"), new Cella("SO"), 
+                    new Cella("ES"), new Cella("EO"), new Cella("SO"), 
+                    new Cella("NE"), new Cella("EO"), new Cella("SO"), 
+                    new Cella("NE"), new Cella("SO"), new Cella("NE"), 
+                    new Cella("SO"), new Cella("NS"), new Cella("S"), 
+                    new Cella("NES"), new Cella("NO"), new Cella("NE"),
+                    new Cella("SO"), new Cella("ES"), new Cella("EO"));
+
+        labirinto[2] =   new Array(new Cella("O"), new Cella(""), new Cella(""), 
+                    new Cella("E"), new Cella("EO"), new Cella("NSO"), 
+                    new Cella("NS"), new Cella("ES"), new Cella("NO"), 
+                    new Cella("ES"), new Cella("SO"), new Cella("NES"), 
+                    new Cella("O"), new Cella("NE"), new Cella("ESO"), 
+                    new Cella("NO"), new Cella("NE"), new Cella("NSO"),
+                    new Cella("N"), new Cella("ES"), new Cella("O"),
+                    new Cella("NE"), new Cella("NSO"), new Cella("E"));
+
+        labirinto[3] =   new Array(new Cella("SO"), new Cella("S"), new Cella(""), 
+                    new Cella("ES"), new Cella("SO"), new Cella("NE"), 
+                    new Cella("NO"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("NO"), new Cella("NS"), new Cella("NE"), 
+                    new Cella("EO"), new Cella("OS"), new Cella("NS"), 
+                    new Cella("ES"), new Cella("SO"), new Cella("NE"),
+                    new Cella("SO"), new Cella("NE"), new Cella("EO"),
+                    new Cella("SO"), new Cella("NE"), new Cella("EO"));
+
+        labirinto[4] =   new Array(new Cella("NO"), new Cella("NE"), new Cella("EO"), 
+                    new Cella("NO"), new Cella("NS"), new Cella("E"), 
+                    new Cella("SO"), new Cella("NS"), new Cella("NE"), 
+                    new Cella("SO"), new Cella("NE"), new Cella("SO"), 
+                    new Cella("S"), new Cella("NS"), new Cella("NS"), 
+                    new Cella("NS"), new Cella("NE"), new Cella("SO"),
+                    new Cella("NE"), new Cella("EO"), new Cella("EO"),
+                    new Cella("NO"), new Cella("ES"), new Cella("EO"));
+
+        labirinto[5] =   new Array(new Cella("EO"), new Cella("EO"), new Cella("EO"), 
+                    new Cella("O"), new Cella("NE"), new Cella("ESO"), 
+                    new Cella("NO"), new Cella("NE"), new Cella("SO"), 
+                    new Cella("NE"), new Cella("EO"), new Cella("NO"), 
+                    new Cella("NS"), new Cella("NE"), new Cella("NO"), 
+                    new Cella("NS"), new Cella("ES"), new Cella("NO"),
+                    new Cella("ES"), new Cella("EO"), new Cella("EO"),
+                    new Cella("SO"), new Cella("NE"), new Cella("ESO"));
+
+        labirinto[6] =   new Array(new Cella("EO"), new Cella("SO"), new Cella("S"), 
+                    new Cella("ES"), new Cella("EO"), new Cella("NO"), 
+                    new Cella("ES"), new Cella("O"), new Cella("NE"), 
+                    new Cella("SO"), new Cella("S"), new Cella("SE"), 
+                    new Cella("NO"), new Cella("SE"), new Cella("EO"), 
+                    new Cella("NEO"), new Cella("NO"), new Cella("ES"),
+                    new Cella("NO"), new Cella("ES"), new Cella("O"),
+                    new Cella("NE"), new Cella("SO"), new Cella("NE"));
+
+        labirinto[7] =   new Array(new Cella("SO"), new Cella("NS"), new Cella("NE"), 
+                    new Cella("NO"), new Cella("SE"), new Cella("SO"), 
+                    new Cella("NE"), new Cella("EO"), new Cella("SO"), 
+                    new Cella("NE"), new Cella("NO"), new Cella("NES"), 
+                    new Cella("SO"), new Cella("NE"), new Cella("SO"), 
+                    new Cella("E"), new Cella("SO"), new Cella("NE"),
+                    new Cella("SO"), new Cella("NE"), new Cella("ESO"),
+                    new Cella("EO"), new Cella("NO"), new Cella("ES"));
+
+        labirinto[8] =   new Array(new Cella("NO"), new Cella("NE"), new Cella("EO"), 
+                    new Cella("SO"), new Cella("NS"), new Cella("NE"), 
+                    new Cella("EO"), new Cella("O"), new Cella("NES"), 
+                    new Cella("EO"), new Cella("O"), new Cella("NS"), 
+                    new Cella("NE"), new Cella("SO"), new Cella("NE"), 
+                    new Cella("SO"), new Cella("NES"), new Cella("OS"),
+                    new Cella("NE"), new Cella("SO"), new Cella("NE"),
+                    new Cella("EO"), new Cella("SO"), new Cella("NE"));
+
+        labirinto[9] =   new Array(new Cella("EO"), new Cella("EO"), new Cella("SO"), 
+                    new Cella("NS"), new Cella("NES"), new Cella("O"), 
+                    new Cella("ES"), new Cella("EO"), new Cella("NO"), 
+                    new Cella("ES"), new Cella("ESO"), new Cella("ON"), 
+                    new Cella("ES"), new Cella("ON"), new Cella("ES"), 
+                    new Cella("ONE"), new Cella("ON"), new Cella("NS"),
+                    new Cella("ES"), new Cella("NO"), new Cella("ES"),
+                    new Cella("O"), new Cella("NES"), new Cella("EO"));
+
+        labirinto[10] =   new Array(new Cella("EO"), new Cella("SO"), new Cella("NS"), 
+                    new Cella("NS"), new Cella("NS"), new Cella("E"), 
+                    new Cella("NOS"), new Cella("SE"), new Cella("EO"), 
+                    new Cella("ON"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("ON"), new Cella("ES"), new Cella("NO"), 
+                    new Cella("ES"), new Cella("OS"), new Cella("NE"),
+                    new Cella("NO"), new Cella("ES"), new Cella("ON"),
+                    new Cella("ES"), new Cella("ON"), new Cella("E"));
+
+        labirinto[11] =   new Array(new Cella("OS"), new Cella("NS"), new Cella("NE"), 
+                    new Cella("ON"), new Cella("NS"), new Cella("SE"), 
+                    new Cella("NO"), new Cella("NS"), new Cella("S"), 
+                    new Cella("S"), new Cella("NES"), new Cella("NO"), 
+                    new Cella("ES"), new Cella("ON"), new Cella("ES"), 
+                    new Cella("ON"), new Cella("NS"), new Cella("S"),
+                    new Cella("SE"), new Cella("NO"), new Cella("S"),
+                    new Cella("SEN"), new Cella("EO"), new Cella("OSE"));
+
+        labirinto[12] =   new Array(new Cella("NO"), new Cella("NES"), new Cella("EO"), 
+                    new Cella("EO"), new Cella("ONE"), new Cella("ON"), 
+                    new Cella("ES"), new Cella("ON"), new Cella("NE"), 
+                    new Cella("ON"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("ON"), new Cella("SE"), new Cella("NO"), 
+                    new Cella("SE"), new Cella("NOS"), new Cella("N"),
+                    new Cella("NS"), new Cella("ES"), new Cella("NO"),
+                    new Cella("N"), new Cella(""), new Cella("NE"));
+
+        labirinto[13] =   new Array(new Cella("OS"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("EO"), new Cella("EO"), new Cella("O"), 
+                    new Cella("NS"), new Cella("ES"), new Cella("OS"), 
+                    new Cella("SE"), new Cella("NO"), new Cella("NS"), 
+                    new Cella("SE"), new Cella("NO"), new Cella("SE"), 
+                    new Cella("NOS"), new Cella("NE"), new Cella("SO"),
+                    new Cella("NE"), new Cella("NOE"), new Cella("O"),
+                    new Cella(""), new Cella(""), new Cella("E"));
+
+        labirinto[14] =   new Array(new Cella("NO"), new Cella("NS"), new Cella("NS"), 
+                    new Cella("SE"), new Cella("EO"), new Cella("O"), 
+                    new Cella("NE"), new Cella("NO"), new Cella("NS"), 
+                    new Cella("NS"), new Cella("SE"), new Cella("ONE"), 
+                    new Cella("ON"), new Cella("SE"), new Cella("ON"), 
+                    new Cella("NE"), new Cella("SO"), new Cella("NE"),
+                    new Cella("EO"), new Cella("EO"), new Cella("O"),
+                    new Cella(""), new Cella(""), new Cella("E"));
+
+        labirinto[15] =   new Array(new Cella("OS"), new Cella("NS"), new Cella("NS"), 
+                    new Cella("NS"), new Cella("SE"), new Cella("SOE"), 
+                    new Cella("SO"), new Cella("S"), new Cella("NS"), 
+                    new Cella("NS"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("OS"), new Cella("NS"), new Cella("ES"), 
+                    new Cella("OS"), new Cella("NS"), new Cella("ES"),
+                    new Cella("OS"), new Cella("SE"), new Cella("OS"),
+                    new Cella("S"), new Cella("S"), new Cella("SE"));
+       
+        copiaCelle(labirinto);
+        
+    </script>
+</head>
+<body onload="drawer(labirinto);">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2" style="height: 100px; background-color: green;"></div>
+            <div id="ppp" class="col-sm-8"  style="background-color:red; height: 1000px;">
+            </div>
+            <div class="col-sm-2" sTyle="height: 100px; background-color: green;"></div>
+        </div>
+    </div>
+</body>
+</html>

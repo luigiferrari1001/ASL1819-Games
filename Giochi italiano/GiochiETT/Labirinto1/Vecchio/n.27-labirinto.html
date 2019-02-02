@@ -1,0 +1,654 @@
+<html>
+	<head>
+		<title> n. 27 - LABIRINTO  </title>
+		<link href="resetCss.css" rel="stylesheet" type="text/css">
+		<link href="labirinto.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src = "./labirinto.js"></script>
+		<script type="text/javascript" src = "./jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			var lab = new Array();
+			var bordi = new Array("border-top", "border-right");
+			for (var righe=0; righe<16; righe++)
+				lab[righe] = new Array();
+			lab[0][0] = new Array(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+			lab[0][1] = new Array(0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,1);
+			lab[1][0] = new Array(0,0,0,0,0,1,1,0,0,1,1,1,0,1,0,1,0,0,1,0,0,0,0,0);
+			lab[1][1] = new Array(0,0,0,1,0,0,1,0,1,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1);
+			lab[2][0] = new Array(0,0,0,0,1,1,0,0,1,0,1,0,1,0,1,0,1,1,0,1,1,1,1,0);
+			lab[2][1] = new Array(0,0,0,0,0,0,1,1,0,1,1,0,1,0,1,0,0,1,1,0,0,1,1,1);
+			lab[3][0] = new Array(0,0,0,0,1,1,0,0,0,1,0,1,0,1,0,1,1,0,0,0,1,0,0,0);
+			lab[3][1] = new Array(0,0,0,1,0,1,1,1,0,1,0,1,0,1,1,0,0,1,1,1,0,1,0,1);
+			lab[4][0] = new Array(1,1,1,1,0,0,0,1,1,0,0,1,1,0,1,0,1,0,0,0,0,1,1,1);
+			lab[4][1] = new Array(0,1,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,1,0,1,1,0,0,1);
+			lab[5][0] = new Array(0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,1,1,0,0,0,1,0);
+			lab[5][1] = new Array(1,0,1,1,1,0,0,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1);
+			lab[6][0] = new Array(0,1,1,0,0,1,1,1,1,1,0,1,1,0,1,1,0,1,0,0,1,1,0,1);
+			lab[6][1] = new Array(0,1,0,1,0,0,1,0,0,0,1,0,1,1,1,0,1,1,1,0,0,1,1,1);
+			lab[7][0] = new Array(1,1,0,1,1,1,0,1,0,0,1,0,0,0,0,0,1,0,0,1,1,0,0,0);
+			lab[7][1] = new Array(0,1,0,1,0,1,0,0,1,1,0,1,0,1,0,1,0,0,1,0,1,1,0,1);
+			lab[8][0] = new Array(0,0,0,0,0,0,1,1,1,0,0,1,0,1,0,1,0,0,1,0,0,1,1,0);
+			lab[8][1] = new Array(1,0,1,0,1,1,0,0,1,1,0,1,1,0,1,0,1,1,0,1,0,1,0,1);
+			lab[9][0] = new Array(1,1,1,0,1,0,0,1,0,1,1,1,0,0,1,0,1,1,0,1,1,0,1,0);
+			lab[9][1] = new Array(0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1);
+			lab[10][0] = new Array(0,0,0,1,0,1,1,0,1,0,0,0,1,1,0,1,0,0,1,0,0,1,0,0);
+			lab[10][1] = new Array(1,1,1,0,0,0,1,1,0,1,1,0,0,1,0,1,0,1,0,1,1,0,1,1);
+			lab[11][0] = new Array(0,0,0,1,1,1,0,0,0,0,0,1,0,1,1,0,0,1,0,1,0,0,1,0);
+			lab[11][1] = new Array(1,0,0,1,0,1,1,0,1,1,0,1,1,0,0,1,0,1,1,0,1,1,0,1);
+			lab[12][0] = new Array(0,1,1,0,0,0,0,1,1,1,1,0,1,0,1,1,1,0,0,0,1,0,1,1);
+			lab[12][1] = new Array(0,0,1,0,1,1,1,0,0,0,1,0,0,1,0,0,0,1,1,1,0,0,0,1);
+			lab[13][0] = new Array(1,0,0,1,1,0,1,0,0,1,1,1,1,1,1,0,1,0,0,1,0,0,0,0);
+			lab[13][1] = new Array(1,1,1,0,1,0,0,1,1,0,0,0,0,1,0,1,0,1,0,1,0,0,0,1);
+			lab[14][0] = new Array(0,1,0,0,1,0,1,1,0,1,0,0,1,1,0,1,0,1,1,0,0,0,0,0);
+			lab[14][1] = new Array(0,0,1,1,0,1,0,1,0,0,1,1,0,0,1,0,1,0,1,1,0,0,0,1);
+			lab[15][0] = new Array(0,1,1,0,0,1,0,0,1,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0);
+			lab[15][1] = new Array(0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,0,1);
+		</script>
+	</head>
+	<body>
+		
+		<br> <div id="tit""><p class="titolo"> n. 27 - LABIRINTO </p></div> <br><br><br>
+		
+		<div id="puntino">
+			<canvas id="myCanvas"></canvas>
+
+			<script>
+				var ctx = document.getElementById('myCanvas').getContext('2d');
+				var rc = ctx.createRadialGradient(30,30,5,37,35,15);
+				rc.addColorStop(0, '#33ff00');
+				rc.addColorStop(0.9, '#33ff00');
+				rc.addColorStop(1, 'rgba(6,10,72,0)');
+				
+				ctx.fillStyle = rc;
+				ctx.fillRect(0,0,130,130);
+			</script>
+		</div>
+		
+		<p class="didascalia"> Lo sapevi che con ventisette bottiglie di plastica puoi ottenere una felpa
+		di pile? Trova la strada per aiutare la bottiglia a riciclarsi e a salvaguardare
+		l'ambiente! </p> <br>
+		<div class="traccia" align="center">
+			<table id="board" cellspacing="0" cellpadding="0" align="center">
+			<script type="text/javascript">
+				var s = 0;
+				for (var rig=0; rig<lab.length; rig++){
+					document.write ("<tr>"); 
+					for (var col=0; col<lab[rig][0].length; col++){
+						s++;
+						document.write ("<td style='");
+						for (var cella=0; cella<2; cella++){
+							if (lab[rig][cella][col] == 1) 
+								document.write (bordi[cella]+": 2px black solid;");
+						}
+						if (col==0 && rig!=0)
+							document.write ("border-left: 2px black solid;");
+						if (col==0 && rig==0)
+							document.write ("border-left: 2px black solid;");
+						if (rig == lab.length-1)
+							document.write ("border-bottom: 2px black solid;");
+						if (rig==2 && col==3) 
+							document.write ("' id='"+s+"'></td>");
+						else if (rig==lab.length-5 && col==lab[rig][0].length-3)
+							document.write ("'></td>");
+						else
+							document.write ("' id='"+s+"'></td>");
+					}
+					document.write("</tr>");
+				}
+			</script>
+			</table>
+			<div class="inizio"> <img id="imgInizio" src="./immagini/ambiente/inizio.png" alt="inizio"> </div>
+			<div class="bottoniera" align="center">
+				
+				
+				<input id="up1"  type="button" value="" style="" onmouseover="controlloEst('up1');">
+				<input id="up2"  type="button" value="" style="" onmouseover="controlloEst('up2');">
+				<input id="up3"  type="button" value="" style="" onmouseover="controlloEst('up3');">
+				<input id="up4"  type="button" value="" style="" onmouseover="controlloEst('up4');">
+				<input id="up5"  type="button" value="" style="" onmouseover="controlloEst('up5');">
+				<input id="up6"  type="button" value="" style="" onmouseover="controlloEst('up6');">
+				<input id="up7"  type="button" value="" style="" onmouseover="controlloEst('up7');">
+				<input id="up8"  type="button" value="" style="" onmouseover="controlloEst('up8');">
+				<input id="up9"  type="button" value="" style="" onmouseover="controlloEst('up9');">
+				<input id="up10"  type="button" value="" style="" onmouseover="controlloEst('up10');">
+				<input id="up11"  type="button" value="" style="" onmouseover="controlloEst('up11');">
+				<input id="up12"  type="button" value="" style="" onmouseover="controlloEst('up12');">
+				<input id="up13"  type="button" value="" style="" onmouseover="controlloEst('up13');">
+				<input id="up14"  type="button" value="" style="" onmouseover="controlloEst('up14');">
+				<input id="up15"  type="button" value="" style="" onmouseover="controlloEst('up15');">
+				<input id="up16"  type="button" value="" style="" onmouseover="controlloEst('up16');">
+				<input id="up17"  type="button" value="" style="" onmouseover="controlloEst('up17');">
+				<input id="up18"  type="button" value="" style="" onmouseover="controlloEst('up18');">
+				<input id="up19"  type="button" value="" style="" onmouseover="controlloEst('up19');">
+				<input id="up20"  type="button" value="" style="" onmouseover="controlloEst('up20');">
+				<input id="up21"  type="button" value="" style="" onmouseover="controlloEst('up21');">
+				<input id="up22"  type="button" value="" style="" onmouseover="controlloEst('up22');">
+				<input id="up23"  type="button" value="" style="" onmouseover="controlloEst('up23');">
+				<input id="up24"  type="button" value="" style="" onmouseover="controlloEst('up24');">
+				<input id="up25"  type="button" value="" style="" onmouseover="controlloEst('up25');">
+				<input id="up26"  type="button" value="" style="" onmouseover="controlloEst('up26');"> <br>
+				
+				
+				<input id="r1"  type="button" value="" style="" onmouseover="controlloEst('r1');">
+				<input id="1b"  type="button" value="" style="" onmouseover="controlloEst('1b');">
+				<input id="2b"  type="button" value="" style="" onmouseover="controlloEst('2b');">
+				<input id="3b"  type="button" value="" style="" onmouseover="controlloEst('3b');">
+				<input id="4b"  type="button" value="" style="" onmouseover="controlloEst('4b');">
+				<input id="5b"  type="button" value="" style="" onmouseover="changeColor('5b'); cBordiRiga1 ('5', '4', '29', '5b', '4b', '6b', '29b');">
+				<input id="6b"  type="button" value="" style="" onmouseover="changeColor('6b'); cBordiRiga1 ('6', '5', '30', '6b', '5b', '7b', '30b');">
+				<input id="7b"  type="button" value="" style="" onmouseover="changeColor('7b'); cBordiRiga1 ('7', '6', '31', '7b', '6b', '8b', '31b');">
+				<input id="8b"  type="button" value="" style="" onmouseover="changeColor('8b'); cBordiRiga1 ('8', '7', '32', '8b', '7b', '9b', '32b');">
+				<input id="9b"  type="button" value="" style="" onmouseover="changeColor('9b'); cBordiRiga1 ('9', '8', '33', '9b', '8b', '10b', '33b');">
+				<input id="10b"  type="button" value="" style="" onmouseover="changeColor('10b'); cBordiRiga1 ('10', '9', '34', '10b', '9b', '11b', '34b');">
+				<input id="11b"  type="button" value="" style="" onmouseover="changeColor('11b'); cBordiRiga1 ('11', '10', '35', '11b', '10b', '12b', '35b');">
+				<input id="12b"  type="button" value="" style="" onmouseover="changeColor('12b'); cBordiRiga1 ('12', '11', '36', '12b', '11b', '13b', '36b');">
+				<input id="13b"  type="button" value="" style="" onmouseover="changeColor('13b'); cBordiRiga1 ('13', '12', '37', '13b', '12b', '14b', '37b');">
+				<input id="14b"  type="button" value="" style="" onmouseover="changeColor('14b'); cBordiRiga1 ('14', '13', '38', '14b', '13b', '15b', '38b');">
+				<input id="15b"  type="button" value="" style="" onmouseover="changeColor('15b'); cBordiRiga1 ('15', '14', '39', '15b', '14b', '16b', '39b');">
+				<input id="16b"  type="button" value="" style="" onmouseover="changeColor('16b'); cBordiRiga1 ('16', '15', '40', '16b', '15b', '17b', '40b');">
+				<input id="17b"  type="button" value="" style="" onmouseover="changeColor('17b'); cBordiRiga1 ('17', '16', '41', '17b', '16b', '18b', '41b');">
+				<input id="18b"  type="button" value="" style="" onmouseover="changeColor('18b'); cBordiRiga1 ('18', '17', '42', '18b', '17b', '19b', '42b');">
+				<input id="19b"  type="button" value="" style="" onmouseover="changeColor('19b'); cBordiRiga1 ('19', '18', '43', '19b', '18b', '20b', '43b');">
+				<input id="20b"  type="button" value="" style="" onmouseover="changeColor('20b'); cBordiRiga1 ('20', '19', '44', '20b', '19b', '21b', '44b');">
+				<input id="21b"  type="button" value="" style="" onmouseover="changeColor('21b'); cBordiRiga1 ('21', '20', '45', '21b', '20b', '22b', '45b');">
+				<input id="22b"  type="button" value="" style="" onmouseover="changeColor('22b'); cBordiRiga1 ('22', '21', '46', '22b', '21b', '23b', '46b');">
+				<input id="23b"  type="button" value="" style="" onmouseover="changeColor('23b'); cBordiRiga1 ('23', '22', '47', '23b', '22b', '24b', '47b');">
+				<input id="24b"  type="button" value="" style="" onmouseover="changeColor('24b'); cBordiAD ('23', '48', '24b', '23b', '48b');">
+				<input id="l1"  type="button" value="" style="" onmouseover="controlloEst('l1');"> <br>
+				
+				
+				<input id="r2"  type="button" value="" style="" onmouseover="controlloEst('r2');">
+				<input id="25b"  type="button" value="" style="" onmouseover="controlloEst('25b');">
+				<input id="26b"  type="button" value="" style="" onmouseover="controlloEst('26b');">
+				<input id="27b"  type="button" value="" style="" onmouseover="controlloEst('27b');">
+				<input id="28b"  type="button" value="" style="" onmouseover="controlloEst('28b');">
+				<input id="29b"  type="button" value="" style="" onmouseover="changeColor('29b'); cBordiTot('29', '28', '53', '29b', '28b', '30b', '5b', '53b');">
+				<input id="30b"  type="button" value="" style="" onmouseover="changeColor('30b'); cBordiTot('30', '29', '54', '30b', '29b', '31b', '6b', '54b');">
+				<input id="31b"  type="button" value="" style="" onmouseover="changeColor('31b'); cBordiTot('31', '30', '55', '31b', '30b', '32b', '7b', '55b');">
+				<input id="32b"  type="button" value="" style="" onmouseover="changeColor('32b'); cBordiTot('32', '31', '56', '32b', '31b', '33b', '8b', '56b');">
+				<input id="33b"  type="button" value="" style="" onmouseover="changeColor('33b'); cBordiTot('33', '32', '57', '33b', '32b', '34b', '9b', '57b');">
+				<input id="34b"  type="button" value="" style="" onmouseover="changeColor('34b'); cBordiTot('34', '33', '58', '34b', '33b', '35b', '10b', '58b');">
+				<input id="35b"  type="button" value="" style="" onmouseover="changeColor('35b'); cBordiTot('35', '34', '59', '35b', '34b', '36b', '11b', '59b');">
+				<input id="36b"  type="button" value="" style="" onmouseover="changeColor('36b'); cBordiTot('36', '35', '60', '36b', '35b', '37b', '12b', '60b');">
+				<input id="37b"  type="button" value="" style="" onmouseover="changeColor('37b'); cBordiTot('37', '36', '61', '37b', '36b', '38b', '13b', '61b');">
+				<input id="38b"  type="button" value="" style="" onmouseover="changeColor('38b'); cBordiTot('38', '37', '62', '38b', '37b', '39b', '14b', '62b');">
+				<input id="39b"  type="button" value="" style="" onmouseover="changeColor('39b'); cBordiTot('39', '38', '63', '39b', '38b', '40b', '15b', '63b');">
+				<input id="40b"  type="button" value="" style="" onmouseover="changeColor('40b'); cBordiTot('40', '39', '64', '40b', '39b', '41b', '16b', '64b');">
+				<input id="41b"  type="button" value="" style="" onmouseover="changeColor('41b'); cBordiTot('41', '40', '65', '41b', '40b', '42b', '17b', '65b');">
+				<input id="42b"  type="button" value="" style="" onmouseover="changeColor('42b'); cBordiTot('42', '41', '66', '42b', '41b', '43b', '18b', '66b');">
+				<input id="43b"  type="button" value="" style="" onmouseover="changeColor('43b'); cBordiTot('43', '42', '67', '43b', '42b', '44b', '19b', '67b');">
+				<input id="44b"  type="button" value="" style="" onmouseover="changeColor('44b'); cBordiTot('44', '43', '68', '44b', '43b', '45b', '20b', '68b');">
+				<input id="45b"  type="button" value="" style="" onmouseover="changeColor('45b'); cBordiTot('45', '44', '69', '45b', '44b', '46b', '21b', '69b');">
+				<input id="46b"  type="button" value="" style="" onmouseover="changeColor('46b'); cBordiTot('46', '45', '70', '46b', '45b', '47b', '22b', '70b');">
+				<input id="47b"  type="button" value="" style="" onmouseover="changeColor('47b'); cBordiTot('47', '46', '71', '47b', '46b', '48b', '23b', '71b');">
+				<input id="48b"  type="button" value="" style="" onmouseover="changeColor('48b'); cBordiR ('48', '47', '72', '48b', '47b', '24b', '72b');">
+				<input id="l2"  type="button" value="" style="" onmouseover="controlloEst('l2');"> <br>
+				
+				
+				<input id="r3"  type="button" value="" style="" onmouseover="controlloEst('r3');">
+				<input id="49b"  type="button" value="" style="" onmouseover="controlloEst('49b');">
+				<input id="50b"  type="button" value="" style="" onmouseover="controlloEst('50b');">
+				<input id="51b"  type="button" value="" style="" onmouseover="controlloEst('51b');">
+				<input id="52b"  type="button" value="" style="" onmouseover="controlloEst('52b');">
+				<input id="53b"  type="button" value="" style="" onmouseover="colBot1('53b');">
+				<input id="54b"  type="button" value="" style="" onmouseover="changeColor('54b'); cBordiTot('54', '53', '78', '54b', '53b', '55b', '30b', '78b');">
+				<input id="55b"  type="button" value="" style="" onmouseover="changeColor('55b'); cBordiTot('55', '54', '79', '55b', '54b', '56b', '31b', '79b');">
+				<input id="56b"  type="button" value="" style="" onmouseover="changeColor('56b'); cBordiTot('56', '55', '80', '56b', '55b', '57b', '32b', '80b');">
+				<input id="57b"  type="button" value="" style="" onmouseover="changeColor('57b'); cBordiTot('57', '56', '81', '57b', '56b', '58b', '33b', '81b');">
+				<input id="58b"  type="button" value="" style="" onmouseover="changeColor('58b'); cBordiTot('58', '57', '82', '58b', '57b', '59b', '34b', '82b');">
+				<input id="59b"  type="button" value="" style="" onmouseover="changeColor('59b'); cBordiTot('59', '58', '83', '59b', '58b', '60b', '35b', '83b');">
+				<input id="60b"  type="button" value="" style="" onmouseover="changeColor('60b'); cBordiTot('60', '59', '84', '60b', '59b', '61b', '36b', '84b');">
+				<input id="61b"  type="button" value="" style="" onmouseover="changeColor('61b'); cBordiTot('61', '60', '85', '61b', '60b', '62b', '37b', '85b');">
+				<input id="62b"  type="button" value="" style="" onmouseover="changeColor('62b'); cBordiTot('62', '61', '86', '62b', '61b', '63b', '38b', '86b');">
+				<input id="63b"  type="button" value="" style="" onmouseover="changeColor('63b'); cBordiTot('63', '62', '87', '63b', '62b', '64b', '39b', '87b');">
+				<input id="64b"  type="button" value="" style="" onmouseover="changeColor('64b'); cBordiTot('64', '63', '88', '64b', '63b', '65b', '40b', '88b');">
+				<input id="65b"  type="button" value="" style="" onmouseover="changeColor('65b'); cBordiTot('65', '64', '89', '65b', '64b', '66b', '41b', '89b');">
+				<input id="66b"  type="button" value="" style="" onmouseover="changeColor('66b'); cBordiTot('66', '65', '90', '66b', '65b', '67b', '42b', '90b');">
+				<input id="67b"  type="button" value="" style="" onmouseover="changeColor('67b'); cBordiTot('67', '66', '91', '67b', '66b', '68b', '43b', '91b');">
+				<input id="68b"  type="button" value="" style="" onmouseover="changeColor('68b'); cBordiTot('68', '67', '92', '68b', '67b', '69b', '44b', '92b');">
+				<input id="69b"  type="button" value="" style="" onmouseover="changeColor('69b'); cBordiTot('69', '68', '93', '69b', '68b', '70b', '45b', '93b');">
+				<input id="70b"  type="button" value="" style="" onmouseover="changeColor('70b'); cBordiTot('70', '69', '94', '70b', '69b', '71b', '46b', '94b');">
+				<input id="71b"  type="button" value="" style="" onmouseover="changeColor('71b'); cBordiTot('71', '70', '95', '71b', '70b', '72b', '47b', '95b');">
+				<input id="72b"  type="button" value="" style="" onmouseover="changeColor('72b'); cBordiR ('72', '71', '96', '72b', '71b', '48b', '96b');">
+				<input id="l3"  type="button" value="" style="" onmouseover="controlloEst('l3');"> <br>
+				
+				
+				<input id="r4"  type="button" value="" style="" onmouseover="controlloEst('r4');">
+				<input id="73b"  type="button" value="" style="" onmouseover="controlloEst('73b');">
+				<input id="74b"  type="button" value="" style="" onmouseover="controlloEst('74b');">
+				<input id="75b"  type="button" value="" style="" onmouseover="controlloEst('75b');">
+				<input id="76b"  type="button" value="" style="" onmouseover="controlloEst('76b');">
+				<input id="77b"  type="button" value="" style="" onmouseover="changeColor('77b'); cBordiTot('77', '76', '101', '77b', '76b', '78b', '53b', '101b');">
+				<input id="78b"  type="button" value="" style="" onmouseover="changeColor('78b'); cBordiTot('78', '77', '102', '78b', '77b', '79b', '54b', '102b');">
+				<input id="79b"  type="button" value="" style="" onmouseover="changeColor('79b'); cBordiTot('79', '78', '103', '79b', '78b', '80b', '55b', '103b');">
+				<input id="80b"  type="button" value="" style="" onmouseover="changeColor('80b'); cBordiTot('80', '79', '104', '80b', '79b', '81b', '56b', '104b');">
+				<input id="81b"  type="button" value="" style="" onmouseover="changeColor('81b'); cBordiTot('81', '80', '105', '81b', '80b', '82b', '57b', '105b');">
+				<input id="82b"  type="button" value="" style="" onmouseover="changeColor('82b'); cBordiTot('82', '81', '106', '82b', '81b', '83b', '58b', '106b');">
+				<input id="83b"  type="button" value="" style="" onmouseover="changeColor('83b'); cBordiTot('83', '82', '107', '83b', '82b', '84b', '59b', '107b');">
+				<input id="84b"  type="button" value="" style="" onmouseover="changeColor('84b'); cBordiTot('84', '83', '108', '84b', '83b', '85b', '60b', '108b');">
+				<input id="85b"  type="button" value="" style="" onmouseover="changeColor('85b'); cBordiTot('85', '84', '109', '85b', '84b', '86b', '61b', '109b');">
+				<input id="86b"  type="button" value="" style="" onmouseover="changeColor('86b'); cBordiTot('86', '85', '110', '86b', '85b', '87b', '62b', '110b');">
+				<input id="87b"  type="button" value="" style="" onmouseover="changeColor('87b'); cBordiTot('87', '86', '111', '87b', '86b', '88b', '63b', '111b');">
+				<input id="88b"  type="button" value="" style="" onmouseover="changeColor('88b'); cBordiTot('88', '87', '112', '88b', '87b', '89b', '64b', '112b');">
+				<input id="89b"  type="button" value="" style="" onmouseover="changeColor('89b'); cBordiTot('89', '88', '113', '89b', '88b', '90b', '65b', '113b');">
+				<input id="90b"  type="button" value="" style="" onmouseover="changeColor('90b'); cBordiTot('90', '89', '114', '90b', '89b', '91b', '66b', '114b');">
+				<input id="91b"  type="button" value="" style="" onmouseover="changeColor('91b'); cBordiTot('91', '90', '115', '91b', '90b', '92b', '67b', '115b');">
+				<input id="92b"  type="button" value="" style="" onmouseover="changeColor('92b'); cBordiTot('92', '91', '116', '92b', '91b', '93b', '68b', '116b');">
+				<input id="93b"  type="button" value="" style="" onmouseover="changeColor('93b'); cBordiTot('93', '92', '117', '93b', '92b', '94b', '69b', '117b');">
+				<input id="94b"  type="button" value="" style="" onmouseover="changeColor('94b'); cBordiTot('94', '93', '118', '94b', '93b', '95b', '70b', '118b');">
+				<input id="95b"  type="button" value="" style="" onmouseover="changeColor('95b'); cBordiTot('95', '94', '119', '95b', '94b', '96b', '71b', '119b');">
+				<input id="96b"  type="button" value="" style="" onmouseover="changeColor('96b'); cBordiR ('96', '95', '120', '96b', '95b', '72b', '120b');">
+				<input id="l4"  type="button" value="" style="" onmouseover="controlloEst('l4');"> <br>
+				
+				
+				<input id="r5"  type="button" value="" style="" onmouseover="controlloEst('r5');">
+				<input id="97b"  type="button" value="" style="" onmouseover="changeColor('97b'); cBordiL ('97', '121', '97b', '98b', '73b', '121b');">
+				<input id="98b"  type="button" value="" style="" onmouseover="changeColor('98b'); cBordiTot('98', '97', '122', '98b', '97b', '99b', '74b', '122b');">
+				<input id="99b"  type="button" value="" style="" onmouseover="changeColor('99b'); cBordiTot('99', '98', '123', '99b', '98b', '100b', '75b', '123b');">
+				<input id="100b"  type="button" value="" style="" onmouseover="changeColor('100b'); cBordiTot('100', '99', '124', '100b', '99b', '101b', '76b', '124b');">
+				<input id="101b"  type="button" value="" style="" onmouseover="changeColor('101b'); cBordiTot('101', '100', '125', '101b', '100b', '102b', '77b', '125b');">
+				<input id="102b"  type="button" value="" style="" onmouseover="changeColor('102b'); cBordiTot('102', '101', '126', '102b', '101b', '103b', '78b', '126b');">
+				<input id="103b"  type="button" value="" style="" onmouseover="changeColor('103b'); cBordiTot('103', '102', '127', '103b', '102b', '104b', '79b', '127b');">
+				<input id="104b"  type="button" value="" style="" onmouseover="changeColor('104b'); cBordiTot('104', '103', '128', '104b', '103b', '105b', '80b', '128b');">
+				<input id="105b"  type="button" value="" style="" onmouseover="changeColor('105b'); cBordiTot('105', '104', '129', '105b', '104b', '106b', '81b', '129b');">
+				<input id="106b"  type="button" value="" style="" onmouseover="changeColor('106b'); cBordiTot('106', '105', '130', '106b', '105b', '107b', '82b', '130b');">
+				<input id="107b"  type="button" value="" style="" onmouseover="changeColor('107b'); cBordiTot('107', '106', '131', '107b', '106b', '108b', '83b', '131b');">
+				<input id="108b"  type="button" value="" style="" onmouseover="changeColor('108b'); cBordiTot('108', '107', '132', '108b', '107b', '109b', '84b', '132b');">
+				<input id="109b"  type="button" value="" style="" onmouseover="changeColor('109b'); cBordiTot('109', '108', '133', '109b', '108b', '110b', '85b', '133b');">
+				<input id="110b"  type="button" value="" style="" onmouseover="changeColor('110b'); cBordiTot('110', '109', '134', '110b', '109b', '111b', '86b', '134b');">
+				<input id="111b"  type="button" value="" style="" onmouseover="changeColor('111b'); cBordiTot('111', '110', '135', '111b', '110b', '112b', '87b', '135b');">
+				<input id="112b"  type="button" value="" style="" onmouseover="changeColor('112b'); cBordiTot('112', '111', '136', '112b', '111b', '113b', '88b', '136b');">
+				<input id="113b"  type="button" value="" style="" onmouseover="changeColor('113b'); cBordiTot('113', '112', '137', '113b', '112b', '114b', '89b', '137b');">
+				<input id="114b"  type="button" value="" style="" onmouseover="changeColor('114b'); cBordiTot('114', '113', '138', '114b', '113b', '115b', '90b', '138b');">
+				<input id="115b"  type="button" value="" style="" onmouseover="changeColor('115b'); cBordiTot('115', '114', '139', '115b', '114b', '116b', '91b', '139b');">
+				<input id="116b"  type="button" value="" style="" onmouseover="changeColor('116b'); cBordiTot('116', '115', '140', '116b', '115b', '117b', '92b', '140b');">
+				<input id="117b"  type="button" value="" style="" onmouseover="changeColor('117b'); cBordiTot('117', '116', '141', '117b', '116b', '118b', '93b', '141b');">
+				<input id="118b"  type="button" value="" style="" onmouseover="changeColor('118b'); cBordiTot('118', '117', '142', '118b', '117b', '119b', '94b', '142b');">
+				<input id="119b"  type="button" value="" style="" onmouseover="changeColor('119b'); cBordiTot('119', '118', '143', '119b', '118b', '120b', '95b', '143b');">
+				<input id="120b"  type="button" value="" style="" onmouseover="changeColor('120b'); cBordiR ('120', '119', '144', '120b', '119b', '96b', '144b');">
+				<input id="l5"  type="button" value="" style="" onmouseover="controlloEst('l5');"> <br>
+				
+				
+				<input id="r6"  type="button" value="" style="" onmouseover="controlloEst('r6');">
+				<input id="121b"  type="button" value="" style="" onmouseover="changeColor('121b'); cBordiL ('121', '145', '121b', '122b', '97b', '145b');">
+				<input id="122b"  type="button" value="" style="" onmouseover="changeColor('122b'); cBordiTot('122', '121', '146', '122b', '121b', '123b', '98b', '146b');">
+				<input id="123b"  type="button" value="" style="" onmouseover="changeColor('123b'); cBordiTot('123', '122', '147', '123b', '122b', '124b', '99b', '147b');">
+				<input id="124b"  type="button" value="" style="" onmouseover="changeColor('124b'); cBordiTot('124', '123', '148', '124b', '123b', '125b', '100b', '148b');">
+				<input id="125b"  type="button" value="" style="" onmouseover="changeColor('125b'); cBordiTot('125', '124', '149', '125b', '124b', '126b', '101b', '149b');">
+				<input id="126b"  type="button" value="" style="" onmouseover="changeColor('126b'); cBordiTot('126', '125', '150', '126b', '125b', '127b', '102b', '150b');">
+				<input id="127b"  type="button" value="" style="" onmouseover="changeColor('127b'); cBordiTot('127', '126', '151', '127b', '126b', '128b', '103b', '151b');">
+				<input id="128b"  type="button" value="" style="" onmouseover="changeColor('128b'); cBordiTot('128', '127', '152', '128b', '127b', '129b', '104b', '152b');">
+				<input id="129b"  type="button" value="" style="" onmouseover="changeColor('129b'); cBordiTot('129', '128', '153', '129b', '128b', '130b', '105b', '153b');">
+				<input id="130b"  type="button" value="" style="" onmouseover="changeColor('130b'); cBordiTot('130', '129', '154', '130b', '129b', '131b', '106b', '154b');">
+				<input id="131b"  type="button" value="" style="" onmouseover="changeColor('131b'); cBordiTot('131', '130', '155', '131b', '130b', '132b', '107b', '155b');">
+				<input id="132b"  type="button" value="" style="" onmouseover="changeColor('132b'); cBordiTot('132', '131', '156', '132b', '131b', '133b', '108b', '156b');">
+				<input id="133b"  type="button" value="" style="" onmouseover="changeColor('133b'); cBordiTot('133', '132', '157', '133b', '132b', '134b', '109b', '157b');">
+				<input id="134b"  type="button" value="" style="" onmouseover="changeColor('134b'); cBordiTot('134', '133', '158', '134b', '133b', '135b', '110b', '158b');">
+				<input id="135b"  type="button" value="" style="" onmouseover="changeColor('135b'); cBordiTot('135', '134', '159', '135b', '134b', '136b', '111b', '159b');">
+				<input id="136b"  type="button" value="" style="" onmouseover="changeColor('136b'); cBordiTot('136', '135', '160', '136b', '135b', '137b', '112b', '160b');">
+				<input id="137b"  type="button" value="" style="" onmouseover="changeColor('137b'); cBordiTot('137', '136', '161', '137b', '136b', '138b', '113b', '161b');">
+				<input id="138b"  type="button" value="" style="" onmouseover="changeColor('138b'); cBordiTot('138', '137', '162', '138b', '137b', '139b', '114b', '162b');">
+				<input id="139b"  type="button" value="" style="" onmouseover="changeColor('139b'); cBordiTot('139', '138', '163', '139b', '138b', '140b', '115b', '163b');">
+				<input id="140b"  type="button" value="" style="" onmouseover="changeColor('140b'); cBordiTot('140', '139', '164', '140b', '139b', '141b', '116b', '164b');">
+				<input id="141b"  type="button" value="" style="" onmouseover="changeColor('141b'); cBordiTot('141', '140', '165', '141b', '140b', '142b', '117b', '165b');">
+				<input id="142b"  type="button" value="" style="" onmouseover="changeColor('142b'); cBordiTot('142', '141', '166', '142b', '141b', '143b', '118b', '166b');">
+				<input id="143b"  type="button" value="" style="" onmouseover="changeColor('143b'); cBordiTot('143', '142', '167', '143b', '142b', '144b', '119b', '167b');">
+				<input id="144b"  type="button" value="" style="" onmouseover="changeColor('144b'); cBordiR ('144', '143', '168', '144b', '143b', '120b', '168b');">
+				<input id="l6"  type="button" value="" style="" onmouseover="controlloEst('l6');"> <br>
+				
+				
+				<input id="r7"  type="button" value="" style="" onmouseover="controlloEst('r7');">
+				<input id="145b"  type="button" value="" style="" onmouseover="changeColor('145b'); cBordiL ('145', '169', '145b', '146b', '121b', '169b');">
+				<input id="146b"  type="button" value="" style="" onmouseover="changeColor('146b'); cBordiTot('146', '145', '170', '146b', '145b', '147b', '122b', '170b');">
+				<input id="147b"  type="button" value="" style="" onmouseover="changeColor('147b'); cBordiTot('147', '146', '171', '147b', '146b', '148b', '123b', '171b');">
+				<input id="148b"  type="button" value="" style="" onmouseover="changeColor('148b'); cBordiTot('148', '147', '172', '148b', '147b', '149b', '124b', '172b');">
+				<input id="149b"  type="button" value="" style="" onmouseover="changeColor('149b'); cBordiTot('149', '148', '173', '149b', '148b', '150b', '125b', '173b');">
+				<input id="150b"  type="button" value="" style="" onmouseover="changeColor('150b'); cBordiTot('150', '149', '174', '150b', '149b', '151b', '126b', '174b');">
+				<input id="151b"  type="button" value="" style="" onmouseover="changeColor('151b'); cBordiTot('151', '150', '175', '151b', '150b', '152b', '127b', '175b');">
+				<input id="152b"  type="button" value="" style="" onmouseover="changeColor('152b'); cBordiTot('152', '151', '176', '152b', '151b', '153b', '128b', '176b');">
+				<input id="153b"  type="button" value="" style="" onmouseover="changeColor('153b'); cBordiTot('153', '152', '177', '153b', '152b', '154b', '129b', '177b');">
+				<input id="154b"  type="button" value="" style="" onmouseover="changeColor('154b'); cBordiTot('154', '153', '178', '154b', '153b', '155b', '130b', '178b');">
+				<input id="155b"  type="button" value="" style="" onmouseover="changeColor('155b'); cBordiTot('155', '154', '179', '155b', '154b', '156b', '131b', '179b');">
+				<input id="156b"  type="button" value="" style="" onmouseover="changeColor('156b'); cBordiTot('156', '155', '180', '156b', '155b', '157b', '132b', '180b');">
+				<input id="157b"  type="button" value="" style="" onmouseover="changeColor('157b'); cBordiTot('157', '156', '181', '157b', '156b', '158b', '133b', '181b');">
+				<input id="158b"  type="button" value="" style="" onmouseover="changeColor('158b'); cBordiTot('158', '157', '182', '158b', '157b', '159b', '134b', '182b');">
+				<input id="159b"  type="button" value="" style="" onmouseover="changeColor('159b'); cBordiTot('159', '158', '183', '159b', '158b', '160b', '135b', '183b');">
+				<input id="160b"  type="button" value="" style="" onmouseover="changeColor('160b'); cBordiTot('160', '159', '184', '160b', '159b', '161b', '136b', '184b');">
+				<input id="161b"  type="button" value="" style="" onmouseover="changeColor('161b'); cBordiTot('161', '160', '185', '161b', '160b', '162b', '137b', '185b');">
+				<input id="162b"  type="button" value="" style="" onmouseover="changeColor('162b'); cBordiTot('162', '161', '186', '162b', '161b', '163b', '138b', '186b');">
+				<input id="163b"  type="button" value="" style="" onmouseover="changeColor('163b'); cBordiTot('163', '162', '187', '163b', '162b', '164b', '139b', '187b');">
+				<input id="164b"  type="button" value="" style="" onmouseover="changeColor('164b'); cBordiTot('164', '163', '188', '164b', '163b', '165b', '140b', '188b');">
+				<input id="165b"  type="button" value="" style="" onmouseover="changeColor('165b'); cBordiTot('165', '164', '189', '165b', '164b', '166b', '141b', '189b');">
+				<input id="166b"  type="button" value="" style="" onmouseover="changeColor('166b'); cBordiTot('166', '165', '190', '166b', '165b', '167b', '142b', '190b');">
+				<input id="167b"  type="button" value="" style="" onmouseover="changeColor('167b'); cBordiTot('167', '166', '191', '167b', '166b', '168b', '143b', '191b');">
+				<input id="168b"  type="button" value="" style="" onmouseover="changeColor('168b'); cBordiR ('168', '167', '192', '168b', '167b', '144b', '192b');">
+				<input id="l7"  type="button" value="" style="" onmouseover="controlloEst('l7');"> <br>
+				
+				
+				<input id="r8"  type="button" value="" style="" onmouseover="controlloEst('r8');">
+				<input id="169b"  type="button" value="" style="" onmouseover="changeColor('169b'); cBordiL ('169', '193', '169b', '170b', '145b', '193b');">
+				<input id="170b"  type="button" value="" style="" onmouseover="changeColor('170b'); cBordiTot('170', '169', '194', '170b', '169b', '171b', '146b', '194b');">
+				<input id="171b"  type="button" value="" style="" onmouseover="changeColor('171b'); cBordiTot('171', '170', '195', '171b', '170b', '172b', '147b', '195b');">
+				<input id="172b"  type="button" value="" style="" onmouseover="changeColor('172b'); cBordiTot('172', '171', '196', '172b', '171b', '173b', '148b', '196b');">
+				<input id="173b"  type="button" value="" style="" onmouseover="changeColor('173b'); cBordiTot('173', '172', '197', '173b', '172b', '174b', '149b', '197b');">
+				<input id="174b"  type="button" value="" style="" onmouseover="changeColor('174b'); cBordiTot('174', '173', '198', '174b', '173b', '175b', '150b', '198b');">
+				<input id="175b"  type="button" value="" style="" onmouseover="changeColor('175b'); cBordiTot('175', '174', '199', '175b', '174b', '176b', '151b', '199b');">
+				<input id="176b"  type="button" value="" style="" onmouseover="changeColor('176b'); cBordiTot('176', '175', '200', '176b', '175b', '177b', '152b', '200b');">
+				<input id="177b"  type="button" value="" style="" onmouseover="changeColor('177b'); cBordiTot('177', '176', '201', '177b', '176b', '178b', '153b', '201b');">
+				<input id="178b"  type="button" value="" style="" onmouseover="changeColor('178b'); cBordiTot('178', '177', '202', '178b', '177b', '179b', '154b', '202b');">
+				<input id="179b"  type="button" value="" style="" onmouseover="changeColor('179b'); cBordiTot('179', '178', '203', '179b', '178b', '180b', '155b', '203b');">
+				<input id="180b"  type="button" value="" style="" onmouseover="changeColor('180b'); cBordiTot('180', '179', '204', '180b', '179b', '181b', '156b', '204b');">
+				<input id="181b"  type="button" value="" style="" onmouseover="changeColor('181b'); cBordiTot('181', '180', '205', '181b', '180b', '182b', '157b', '205b');">
+				<input id="182b"  type="button" value="" style="" onmouseover="changeColor('182b'); cBordiTot('182', '181', '206', '182b', '181b', '183b', '158b', '206b');">
+				<input id="183b"  type="button" value="" style="" onmouseover="changeColor('183b'); cBordiTot('183', '182', '207', '183b', '182b', '184b', '159b', '207b');">
+				<input id="184b"  type="button" value="" style="" onmouseover="changeColor('184b'); cBordiTot('184', '183', '208', '184b', '183b', '185b', '160b', '208b');">
+				<input id="185b"  type="button" value="" style="" onmouseover="changeColor('185b'); cBordiTot('185', '184', '209', '185b', '184b', '186b', '161b', '209b');">
+				<input id="186b"  type="button" value="" style="" onmouseover="changeColor('186b'); cBordiTot('186', '185', '210', '186b', '185b', '187b', '162b', '210b');">
+				<input id="187b"  type="button" value="" style="" onmouseover="changeColor('187b'); cBordiTot('187', '186', '211', '187b', '186b', '188b', '163b', '211b');">
+				<input id="188b"  type="button" value="" style="" onmouseover="changeColor('188b'); cBordiTot('188', '187', '212', '188b', '187b', '189b', '164b', '212b');">
+				<input id="189b"  type="button" value="" style="" onmouseover="changeColor('189b'); cBordiTot('189', '188', '213', '189b', '188b', '190b', '165b', '213b');">
+				<input id="190b"  type="button" value="" style="" onmouseover="changeColor('190b'); cBordiTot('190', '189', '214', '190b', '189b', '191b', '166b', '214b');">
+				<input id="191b"  type="button" value="" style="" onmouseover="changeColor('191b'); cBordiTot('191', '190', '215', '191b', '190b', '192b', '167b', '215b');">
+				<input id="192b"  type="button" value="" style="" onmouseover="changeColor('192b'); cBordiR ('192', '191', '216', '192b', '191b', '168b', '216b');">
+				<input id="l8"  type="button" value="" style="" onmouseover="controlloEst('l8');"> <br>
+				
+				
+				<input id="r9"  type="button" value="" style="" onmouseover="controlloEst('r9');">
+				<input id="193b"  type="button" value="" style="" onmouseover="changeColor('193b'); cBordiL ('193', '217', '193b', '194b', '169b', '217b');">
+				<input id="194b"  type="button" value="" style="" onmouseover="changeColor('194b'); cBordiTot('194', '193', '218', '194b', '193b', '195b', '170b', '218b');">
+				<input id="195b"  type="button" value="" style="" onmouseover="changeColor('195b'); cBordiTot('195', '194', '219', '195b', '194b', '196b', '171b', '219b');">
+				<input id="196b"  type="button" value="" style="" onmouseover="changeColor('196b'); cBordiTot('196', '195', '220', '196b', '195b', '197b', '172b', '220b');">
+				<input id="197b"  type="button" value="" style="" onmouseover="changeColor('197b'); cBordiTot('197', '196', '221', '197b', '196b', '198b', '173b', '221b');">
+				<input id="198b"  type="button" value="" style="" onmouseover="changeColor('198b'); cBordiTot('198', '197', '222', '198b', '197b', '199b', '174b', '222b');">
+				<input id="199b"  type="button" value="" style="" onmouseover="changeColor('199b'); cBordiTot('199', '198', '223', '199b', '198b', '200b', '175b', '223b');">
+				<input id="200b"  type="button" value="" style="" onmouseover="changeColor('200b'); cBordiTot('200', '199', '224', '200b', '199b', '201b', '176b', '224b');">
+				<input id="201b"  type="button" value="" style="" onmouseover="changeColor('201b'); cBordiTot('201', '200', '225', '201b', '200b', '202b', '177b', '225b');">
+				<input id="202b"  type="button" value="" style="" onmouseover="changeColor('202b'); cBordiTot('202', '201', '226', '202b', '201b', '203b', '178b', '226b');">
+				<input id="203b"  type="button" value="" style="" onmouseover="changeColor('203b'); cBordiTot('203', '202', '227', '203b', '202b', '204b', '179b', '227b');">
+				<input id="204b"  type="button" value="" style="" onmouseover="changeColor('204b'); cBordiTot('204', '203', '228', '204b', '203b', '205b', '180b', '228b');">
+				<input id="205b"  type="button" value="" style="" onmouseover="changeColor('205b'); cBordiTot('205', '204', '229', '205b', '204b', '206b', '181b', '229b');">
+				<input id="206b"  type="button" value="" style="" onmouseover="changeColor('206b'); cBordiTot('206', '205', '230', '206b', '205b', '207b', '182b', '230b');">
+				<input id="207b"  type="button" value="" style="" onmouseover="changeColor('207b'); cBordiTot('207', '206', '231', '207b', '206b', '208b', '183b', '231b');">
+				<input id="208b"  type="button" value="" style="" onmouseover="changeColor('208b'); cBordiTot('208', '207', '232', '208b', '207b', '209b', '184b', '232b');">
+				<input id="209b"  type="button" value="" style="" onmouseover="changeColor('209b'); cBordiTot('209', '208', '233', '209b', '208b', '210b', '185b', '233b');">
+				<input id="210b"  type="button" value="" style="" onmouseover="changeColor('210b'); cBordiTot('210', '209', '234', '210b', '209b', '211b', '186b', '234b');">
+				<input id="211b"  type="button" value="" style="" onmouseover="changeColor('211b'); cBordiTot('211', '210', '235', '211b', '210b', '212b', '187b', '235b');">
+				<input id="212b"  type="button" value="" style="" onmouseover="changeColor('212b'); cBordiTot('212', '211', '236', '212b', '211b', '213b', '188b', '236b');">
+				<input id="213b"  type="button" value="" style="" onmouseover="changeColor('213b'); cBordiTot('213', '212', '237', '213b', '212b', '214b', '189b', '237b');">
+				<input id="214b"  type="button" value="" style="" onmouseover="changeColor('214b'); cBordiTot('214', '213', '238', '214b', '213b', '215b', '190b', '238b');">
+				<input id="215b"  type="button" value="" style="" onmouseover="changeColor('215b'); cBordiTot('215', '214', '239', '215b', '214b', '216b', '191b', '239b');">
+				<input id="216b"  type="button" value="" style="" onmouseover="changeColor('216b'); cBordiR ('216', '215', '240', '216b', '215b', '192b', '240b');">
+				<input id="l9"  type="button" value="" style="" onmouseover="controlloEst('l9');"> <br>
+				
+				
+				<input id="r10"  type="button" value="" style="" onmouseover="controlloEst('r10');">
+				<input id="217b"  type="button" value="" style="" onmouseover="changeColor('217b'); cBordiL ('217', '241', '217b', '218b', '193b', '241b');">
+				<input id="218b"  type="button" value="" style="" onmouseover="changeColor('218b'); cBordiTot('218', '217', '242', '218b', '217b', '219b', '194b', '242b');">
+				<input id="219b"  type="button" value="" style="" onmouseover="changeColor('219b'); cBordiTot('219', '218', '243', '219b', '218b', '220b', '195b', '243b');">
+				<input id="220b"  type="button" value="" style="" onmouseover="changeColor('220b'); cBordiTot('220', '219', '244', '220b', '219b', '221b', '196b', '244b');">
+				<input id="221b"  type="button" value="" style="" onmouseover="changeColor('221b'); cBordiTot('221', '220', '245', '221b', '220b', '222b', '197b', '245b');">
+				<input id="222b"  type="button" value="" style="" onmouseover="changeColor('222b'); cBordiTot('222', '221', '246', '222b', '221b', '223b', '198b', '246b');">
+				<input id="223b"  type="button" value="" style="" onmouseover="changeColor('223b'); cBordiTot('223', '222', '247', '223b', '222b', '224b', '199b', '247b');">
+				<input id="224b"  type="button" value="" style="" onmouseover="changeColor('224b'); cBordiTot('224', '223', '248', '224b', '223b', '225b', '200b', '248b');">
+				<input id="225b"  type="button" value="" style="" onmouseover="changeColor('225b'); cBordiTot('225', '224', '249', '225b', '224b', '226b', '201b', '249b');">
+				<input id="226b"  type="button" value="" style="" onmouseover="changeColor('226b'); cBordiTot('226', '225', '250', '226b', '225b', '227b', '202b', '250b');">
+				<input id="227b"  type="button" value="" style="" onmouseover="changeColor('227b'); cBordiTot('227', '226', '251', '227b', '226b', '228b', '203b', '251b');">
+				<input id="228b"  type="button" value="" style="" onmouseover="changeColor('228b'); cBordiTot('228', '227', '252', '228b', '227b', '229b', '204b', '252b');">
+				<input id="229b"  type="button" value="" style="" onmouseover="changeColor('229b'); cBordiTot('229', '228', '253', '229b', '228b', '230b', '205b', '253b');">
+				<input id="230b"  type="button" value="" style="" onmouseover="changeColor('230b'); cBordiTot('230', '229', '254', '230b', '229b', '231b', '206b', '254b');">
+				<input id="231b"  type="button" value="" style="" onmouseover="changeColor('231b'); cBordiTot('231', '230', '255', '231b', '230b', '232b', '207b', '255b');">
+				<input id="232b"  type="button" value="" style="" onmouseover="changeColor('232b'); cBordiTot('232', '231', '256', '232b', '231b', '233b', '208b', '256b');">
+				<input id="233b"  type="button" value="" style="" onmouseover="changeColor('233b'); cBordiTot('233', '232', '257', '233b', '232b', '234b', '209b', '257b');">
+				<input id="234b"  type="button" value="" style="" onmouseover="changeColor('234b'); cBordiTot('234', '233', '258', '234b', '233b', '235b', '210b', '258b');">
+				<input id="235b"  type="button" value="" style="" onmouseover="changeColor('235b'); cBordiTot('235', '234', '259', '235b', '234b', '236b', '211b', '259b');">
+				<input id="236b"  type="button" value="" style="" onmouseover="changeColor('236b'); cBordiTot('236', '235', '260', '236b', '235b', '237b', '212b', '260b');">
+				<input id="237b"  type="button" value="" style="" onmouseover="changeColor('237b'); cBordiTot('237', '236', '261', '237b', '236b', '238b', '213b', '261b');">
+				<input id="238b"  type="button" value="" style="" onmouseover="changeColor('238b'); cBordiTot('238', '237', '262', '238b', '237b', '239b', '214b', '262b');">
+				<input id="239b"  type="button" value="" style="" onmouseover="changeColor('239b'); cBordiTot('239', '238', '263', '239b', '238b', '240b', '215b', '263b');">
+				<input id="240b"  type="button" value="" style="" onmouseover="changeColor('240b'); cBordiR ('240', '239', '264', '240b', '239b', '216b', '264b');">
+				<input id="l10"  type="button" value="" style="" onmouseover="controlloEst('l10');"> <br>
+				
+				
+				<input id="r11"  type="button" value="" style="" onmouseover="controlloEst('r11');">
+				<input id="241b"  type="button" value="" style="" onmouseover="changeColor('241b'); cBordiL ('241', '265', '241b', '242b', '217b', '265b');">
+				<input id="242b"  type="button" value="" style="" onmouseover="changeColor('242b'); cBordiTot('242', '241', '266', '242b', '241b', '243b', '218b', '266b');">
+				<input id="243b"  type="button" value="" style="" onmouseover="changeColor('243b'); cBordiTot('243', '242', '267', '243b', '242b', '244b', '219b', '267b');">
+				<input id="244b"  type="button" value="" style="" onmouseover="changeColor('244b'); cBordiTot('244', '243', '268', '244b', '243b', '245b', '220b', '268b');">
+				<input id="245b"  type="button" value="" style="" onmouseover="changeColor('245b'); cBordiTot('245', '244', '269', '245b', '244b', '246b', '221b', '269b');">
+				<input id="246b"  type="button" value="" style="" onmouseover="changeColor('246b'); cBordiTot('246', '245', '270', '246b', '245b', '247b', '222b', '270b');">
+				<input id="247b"  type="button" value="" style="" onmouseover="changeColor('247b'); cBordiTot('247', '246', '271', '247b', '246b', '248b', '223b', '271b');">
+				<input id="248b"  type="button" value="" style="" onmouseover="changeColor('248b'); cBordiTot('248', '247', '272', '248b', '247b', '249b', '224b', '272b');">
+				<input id="249b"  type="button" value="" style="" onmouseover="changeColor('249b'); cBordiTot('249', '248', '273', '249b', '248b', '250b', '225b', '273b');">
+				<input id="250b"  type="button" value="" style="" onmouseover="changeColor('250b'); cBordiTot('250', '249', '274', '250b', '249b', '251b', '226b', '274b');">
+				<input id="251b"  type="button" value="" style="" onmouseover="changeColor('251b'); cBordiTot('251', '250', '275', '251b', '250b', '252b', '227b', '275b');">
+				<input id="252b"  type="button" value="" style="" onmouseover="changeColor('252b'); cBordiTot('252', '251', '276', '252b', '251b', '253b', '228b', '276b');">
+				<input id="253b"  type="button" value="" style="" onmouseover="changeColor('253b'); cBordiTot('253', '252', '277', '253b', '252b', '254b', '229b', '277b');">
+				<input id="254b"  type="button" value="" style="" onmouseover="changeColor('254b'); cBordiTot('254', '253', '278', '254b', '253b', '255b', '230b', '278b');">
+				<input id="255b"  type="button" value="" style="" onmouseover="changeColor('255b'); cBordiTot('255', '254', '279', '255b', '254b', '256b', '231b', '279b');">
+				<input id="256b"  type="button" value="" style="" onmouseover="changeColor('256b'); cBordiTot('256', '255', '280', '256b', '255b', '257b', '232b', '280b');">
+				<input id="257b"  type="button" value="" style="" onmouseover="changeColor('257b'); cBordiTot('257', '256', '281', '257b', '256b', '258b', '233b', '281b');">
+				<input id="258b"  type="button" value="" style="" onmouseover="changeColor('258b'); cBordiTot('258', '257', '282', '258b', '257b', '259b', '234b', '282b');">
+				<input id="259b"  type="button" value="" style="" onmouseover="changeColor('259b'); cBordiTot('259', '258', '283', '259b', '258b', '260b', '235b', '283b');">
+				<input id="260b"  type="button" value="" style="" onmouseover="changeColor('260b'); cBordiTot('260', '259', '284', '260b', '259b', '261b', '236b', '284b');">
+				<input id="261b"  type="button" value="" style="" onmouseover="changeColor('261b'); cBordiTot('261', '260', '285', '261b', '260b', '262b', '237b', '285b');">
+				<input id="262b"  type="button" value="" style="" onmouseover="changeColor('262b'); cBordiTot('262', '261', '286', '262b', '261b', '263b', '238b', '286b');">
+				<input id="263b"  type="button" value="" style="" onmouseover="changeColor('263b'); cBordiTot('263', '262', '287', '263b', '262b', '264b', '239b', '287b');">
+				<input id="264b"  type="button" value="" style="" onmouseover="changeColor('264b'); cBordiR ('264', '263', '288', '264b', '263b', '240b', '288b');">
+				<input id="l11"  type="button" value="" style="" onmouseover="controlloEst('l11');"> <br>
+				
+				
+				<input id="r12"  type="button" value="" style="" onmouseover="controlloEst('r12');">
+				<input id="265b"  type="button" value="" style="" onmouseover="changeColor('265b'); cBordiL ('265', '289', '265b', '266b', '241b', '289b');">
+				<input id="266b"  type="button" value="" style="" onmouseover="changeColor('266b'); cBordiTot('266', '265', '290', '266b', '265b', '267b', '242b', '290b');">
+				<input id="267b"  type="button" value="" style="" onmouseover="changeColor('267b'); cBordiTot('267', '266', '291', '267b', '266b', '268b', '243b', '291b');">
+				<input id="268b"  type="button" value="" style="" onmouseover="changeColor('268b'); cBordiTot('268', '267', '292', '268b', '267b', '269b', '244b', '292b');">
+				<input id="269b"  type="button" value="" style="" onmouseover="changeColor('269b'); cBordiTot('269', '268', '293', '269b', '268b', '270b', '245b', '293b');">
+				<input id="270b"  type="button" value="" style="" onmouseover="changeColor('270b'); cBordiTot('270', '269', '294', '270b', '269b', '271b', '246b', '294b');">
+				<input id="271b"  type="button" value="" style="" onmouseover="changeColor('271b'); cBordiTot('271', '270', '295', '271b', '270b', '272b', '247b', '295b');">
+				<input id="272b"  type="button" value="" style="" onmouseover="changeColor('272b'); cBordiTot('272', '271', '296', '272b', '271b', '273b', '248b', '296b');">
+				<input id="273b"  type="button" value="" style="" onmouseover="changeColor('273b'); cBordiTot('273', '272', '297', '273b', '272b', '274b', '249b', '297b');">
+				<input id="274b"  type="button" value="" style="" onmouseover="changeColor('274b'); cBordiTot('274', '273', '298', '274b', '273b', '275b', '250b', '298b');">
+				<input id="275b"  type="button" value="" style="" onmouseover="changeColor('275b'); cBordiTot('275', '274', '299', '275b', '274b', '276b', '251b', '299b');">
+				<input id="276b"  type="button" value="" style="" onmouseover="changeColor('276b'); cBordiTot('276', '275', '300', '276b', '275b', '277b', '252b', '300b');">
+				<input id="277b"  type="button" value="" style="" onmouseover="changeColor('277b'); cBordiTot('277', '276', '301', '277b', '276b', '278b', '253b', '301b');">
+				<input id="278b"  type="button" value="" style="" onmouseover="changeColor('278b'); cBordiTot('278', '277', '302', '278b', '277b', '279b', '254b', '302b');">
+				<input id="279b"  type="button" value="" style="" onmouseover="changeColor('279b'); cBordiTot('279', '278', '303', '279b', '278b', '280b', '255b', '303b');">
+				<input id="280b"  type="button" value="" style="" onmouseover="changeColor('280b'); cBordiTot('280', '279', '304', '280b', '279b', '281b', '256b', '304b');">
+				<input id="281b"  type="button" value="" style="" onmouseover="changeColor('281b'); cBordiTot('281', '280', '305', '281b', '280b', '282b', '257b', '305b');">
+				<input id="282b"  type="button" value="" style="" onmouseover="changeColor('282b'); cBordiTot('282', '281', '306', '282b', '281b', '283b', '258b', '306b');">
+				<input id="283b"  type="button" value="" style="" onmouseover="changeColor('283b'); cBordiTot('283', '282', '307', '283b', '282b', '284b', '259b', '307b');">
+				<input id="284b"  type="button" value="" style="" onmouseover="changeColor('284b'); cBordiTot('284', '283', '308', '284b', '283b', '285b', '260b', '308b');">
+				<input id="285b"  type="button" value="" style="" onmouseover="changeColor('285b'); cBordiTot('285', '284', '309', '285b', '284b', '286b', '261b', '309b');">
+				<input id="286b"  type="button" value="" style="" onmouseover="changeColor('286b'); cBordiTot('286', '285', '310', '286b', '285b', '287b', '262b', '310b');">  <!--BOTTONE FINALE-->
+				<input id="287b"  type="button" value="" style="" onmouseover="changeColor('287b'); cBordiTot('287', '286', '311', '287b', '286b', '288b', '263b', '311b');">
+				<input id="288b"  type="button" value="" style="" onmouseover="changeColor('288b'); cBordiR ('288', '287', '312', '288b', '287b', '264b', '312b');">
+				<input id="l12"  type="button" value="" style="" onmouseover="controlloEst('l12');"> <br>
+				
+				
+				<input id="r13"  type="button" value="" style="" onmouseover="controlloEst('r13');">
+				<input id="289b"  type="button" value="" style="" onmouseover="changeColor('289b'); cBordiL ('289', '313', '289b', '290b', '265b', '313b');">
+				<input id="290b"  type="button" value="" style="" onmouseover="changeColor('290b'); cBordiTot('290', '289', '314', '290b', '289b', '291b', '266b', '314b');">
+				<input id="291b"  type="button" value="" style="" onmouseover="changeColor('291b'); cBordiTot('291', '290', '315', '291b', '290b', '292b', '267b', '315b');">
+				<input id="292b"  type="button" value="" style="" onmouseover="changeColor('292b'); cBordiTot('292', '291', '316', '292b', '291b', '293b', '268b', '316b');">
+				<input id="293b"  type="button" value="" style="" onmouseover="changeColor('293b'); cBordiTot('293', '292', '317', '293b', '292b', '294b', '269b', '317b');">
+				<input id="294b"  type="button" value="" style="" onmouseover="changeColor('294b'); cBordiTot('294', '293', '318', '294b', '293b', '295b', '270b', '318b');">
+				<input id="295b"  type="button" value="" style="" onmouseover="changeColor('295b'); cBordiTot('295', '294', '319', '295b', '294b', '296b', '271b', '319b');">
+				<input id="296b"  type="button" value="" style="" onmouseover="changeColor('296b'); cBordiTot('296', '295', '320', '296b', '295b', '297b', '272b', '320b');">
+				<input id="297b"  type="button" value="" style="" onmouseover="changeColor('297b'); cBordiTot('297', '296', '321', '297b', '296b', '298b', '273b', '321b');">
+				<input id="298b"  type="button" value="" style="" onmouseover="changeColor('298b'); cBordiTot('298', '297', '322', '298b', '297b', '299b', '274b', '322b');">
+				<input id="299b"  type="button" value="" style="" onmouseover="changeColor('299b'); cBordiTot('299', '298', '323', '299b', '298b', '300b', '275b', '323b');">
+				<input id="300b"  type="button" value="" style="" onmouseover="changeColor('300b'); cBordiTot('300', '299', '324', '300b', '299b', '301b', '276b', '324b');">
+				<input id="301b"  type="button" value="" style="" onmouseover="changeColor('301b'); cBordiTot('301', '300', '325', '301b', '300b', '302b', '277b', '325b');">
+				<input id="302b"  type="button" value="" style="" onmouseover="changeColor('302b'); cBordiTot('302', '301', '326', '302b', '301b', '303b', '278b', '326b');">
+				<input id="303b"  type="button" value="" style="" onmouseover="changeColor('303b'); cBordiTot('303', '302', '327', '303b', '302b', '304b', '279b', '327b');">
+				<input id="304b"  type="button" value="" style="" onmouseover="changeColor('304b'); cBordiTot('304', '303', '328', '304b', '303b', '305b', '280b', '328b');">
+				<input id="305b"  type="button" value="" style="" onmouseover="changeColor('305b'); cBordiTot('305', '304', '329', '305b', '304b', '306b', '281b', '329b');">
+				<input id="306b"  type="button" value="" style="" onmouseover="changeColor('306b'); cBordiTot('306', '305', '330', '306b', '305b', '307b', '282b', '330b');">
+				<input id="307b"  type="button" value="" style="" onmouseover="changeColor('307b'); cBordiTot('307', '306', '331', '307b', '306b', '308b', '283b', '331b');">
+				<input id="308b"  type="button" value="" style="" onmouseover="changeColor('308b'); cBordiTot('308', '307', '332', '308b', '307b', '309b', '284b', '332b');">
+				<input id="309b"  type="button" value="" style="" onmouseover="changeColor('309b'); cBordiTot('309', '308', '333', '309b', '308b', '310b', '285b', '333b');">
+				<input id="310b"  type="button" value="" style="" onmouseover="changeColor('310b'); cBordiTot('310', '309', '334', '310b', '309b', '311b', '286b', '334b');">
+				<input id="311b"  type="button" value="" style="" onmouseover="changeColor('311b'); cBordiTot('311', '310', '335', '311b', '310b', '312b', '287b', '335b');">
+				<input id="312b"  type="button" value="" style="" onmouseover="changeColor('312b'); cBordiR ('312', '311', '336', '312b', '311b', '288b', '336b');">
+				<input id="l13"  type="button" value="" style="" onmouseover="controlloEst('l13');"> <br>
+				
+				
+				<input id="r14"  type="button" value="" style="" onmouseover="controlloEst('r14');">
+				<input id="313b"  type="button" value="" style="" onmouseover="changeColor('313b'); cBordiL ('313', '337', '313b', '314b', '289b', '337b');">
+				<input id="314b"  type="button" value="" style="" onmouseover="changeColor('314b'); cBordiTot('314', '313', '338', '314b', '313b', '315b', '290b', '338b');">
+				<input id="315b"  type="button" value="" style="" onmouseover="changeColor('315b'); cBordiTot('315', '314', '339', '315b', '314b', '316b', '291b', '339b');">
+				<input id="316b"  type="button" value="" style="" onmouseover="changeColor('316b'); cBordiTot('316', '315', '340', '316b', '315b', '317b', '292b', '340b');">
+				<input id="317b"  type="button" value="" style="" onmouseover="changeColor('317b'); cBordiTot('317', '316', '341', '317b', '316b', '318b', '293b', '341b');">
+				<input id="318b"  type="button" value="" style="" onmouseover="changeColor('318b'); cBordiTot('318', '317', '342', '318b', '317b', '319b', '294b', '342b');">
+				<input id="319b"  type="button" value="" style="" onmouseover="changeColor('319b'); cBordiTot('319', '318', '343', '319b', '318b', '320b', '295b', '343b');">
+				<input id="320b"  type="button" value="" style="" onmouseover="changeColor('320b'); cBordiTot('320', '319', '344', '320b', '319b', '321b', '296b', '344b');">
+				<input id="321b"  type="button" value="" style="" onmouseover="changeColor('321b'); cBordiTot('321', '320', '345', '321b', '320b', '322b', '297b', '345b');">
+				<input id="322b"  type="button" value="" style="" onmouseover="changeColor('322b'); cBordiTot('322', '321', '346', '322b', '321b', '323b', '298b', '346b');">
+				<input id="323b"  type="button" value="" style="" onmouseover="changeColor('323b'); cBordiTot('323', '322', '347', '323b', '322b', '324b', '299b', '347b');">
+				<input id="324b"  type="button" value="" style="" onmouseover="changeColor('324b'); cBordiTot('324', '323', '348', '324b', '323b', '325b', '300b', '348b');">
+				<input id="325b"  type="button" value="" style="" onmouseover="changeColor('325b'); cBordiTot('325', '324', '349', '325b', '324b', '326b', '301b', '349b');">
+				<input id="326b"  type="button" value="" style="" onmouseover="changeColor('326b'); cBordiTot('326', '325', '350', '326b', '325b', '327b', '302b', '350b');">
+				<input id="327b"  type="button" value="" style="" onmouseover="changeColor('327b'); cBordiTot('327', '326', '351', '327b', '326b', '328b', '303b', '351b');">
+				<input id="328b"  type="button" value="" style="" onmouseover="changeColor('328b'); cBordiTot('328', '327', '352', '328b', '327b', '329b', '304b', '352b');">
+				<input id="329b"  type="button" value="" style="" onmouseover="changeColor('329b'); cBordiTot('329', '328', '353', '329b', '328b', '330b', '305b', '353b');">
+				<input id="330b"  type="button" value="" style="" onmouseover="changeColor('330b'); cBordiTot('330', '329', '354', '330b', '329b', '331b', '306b', '354b');">
+				<input id="331b"  type="button" value="" style="" onmouseover="changeColor('331b'); cBordiTot('331', '330', '355', '331b', '330b', '332b', '307b', '355b');">
+				<input id="332b"  type="button" value="" style="" onmouseover="changeColor('332b'); cBordiTot('332', '331', '356', '332b', '331b', '333b', '308b', '356b');">
+				<input id="333b"  type="button" value="" style="" onmouseover="changeColor('333b'); cBordiTot('333', '332', '357', '333b', '332b', '334b', '309b', '357b');">
+				<input id="334b"  type="button" value="" style="" onmouseover="changeColor('334b'); cBordiTot('334', '333', '358', '334b', '333b', '335b', '310b', '358b');">
+				<input id="335b"  type="button" value="" style="" onmouseover="changeColor('335b'); cBordiTot('335', '334', '359', '335b', '334b', '336b', '311b', '359b');">
+				<input id="336b"  type="button" value="" style="" onmouseover="changeColor('336b'); cBordiR ('336', '335', '360', '336b', '335b', '312b', '360b');">
+				<input id="l14"  type="button" value="" style="" onmouseover="controlloEst('l14');"> <br>
+				
+				
+				<input id="r15"  type="button" value="" style="" onmouseover="controlloEst('r15');">
+				<input id="337b"  type="button" value="" style="" onmouseover="changeColor('337b'); cBordiL ('337', '361', '337b', '338b', '313b', '361b');">
+				<input id="338b"  type="button" value="" style="" onmouseover="changeColor('338b'); cBordiTot('338', '337', '362', '338b', '337b', '339b', '314b', '362b');">
+				<input id="339b"  type="button" value="" style="" onmouseover="changeColor('339b'); cBordiTot('339', '338', '363', '339b', '338b', '340b', '315b', '363b');">
+				<input id="340b"  type="button" value="" style="" onmouseover="changeColor('340b'); cBordiTot('340', '339', '364', '340b', '339b', '341b', '316b', '364b');">
+				<input id="341b"  type="button" value="" style="" onmouseover="changeColor('341b'); cBordiTot('341', '340', '365', '341b', '340b', '342b', '317b', '365b');">
+				<input id="342b"  type="button" value="" style="" onmouseover="changeColor('342b'); cBordiTot('342', '341', '366', '342b', '341b', '343b', '318b', '366b');">
+				<input id="343b"  type="button" value="" style="" onmouseover="changeColor('343b'); cBordiTot('343', '342', '367', '343b', '342b', '344b', '319b', '367b');">
+				<input id="344b"  type="button" value="" style="" onmouseover="changeColor('344b'); cBordiTot('344', '343', '368', '344b', '343b', '345b', '320b', '368b');">
+				<input id="345b"  type="button" value="" style="" onmouseover="changeColor('345b'); cBordiTot('345', '344', '369', '345b', '344b', '346b', '321b', '369b');">
+				<input id="346b"  type="button" value="" style="" onmouseover="changeColor('346b'); cBordiTot('346', '345', '370', '346b', '345b', '347b', '322b', '370b');">
+				<input id="347b"  type="button" value="" style="" onmouseover="changeColor('347b'); cBordiTot('347', '346', '371', '347b', '346b', '348b', '323b', '371b');">
+				<input id="348b"  type="button" value="" style="" onmouseover="changeColor('348b'); cBordiTot('348', '347', '372', '348b', '347b', '349b', '324b', '372b');">
+				<input id="349b"  type="button" value="" style="" onmouseover="changeColor('349b'); cBordiTot('349', '348', '373', '349b', '348b', '350b', '325b', '373b');">
+				<input id="350b"  type="button" value="" style="" onmouseover="changeColor('350b'); cBordiTot('350', '349', '374', '350b', '349b', '351b', '326b', '374b');">
+				<input id="351b"  type="button" value="" style="" onmouseover="changeColor('351b'); cBordiTot('351', '350', '375', '351b', '350b', '352b', '327b', '375b');">
+				<input id="352b"  type="button" value="" style="" onmouseover="changeColor('352b'); cBordiTot('352', '351', '376', '352b', '351b', '353b', '328b', '376b');">
+				<input id="353b"  type="button" value="" style="" onmouseover="changeColor('353b'); cBordiTot('353', '352', '377', '353b', '352b', '354b', '329b', '377b');">
+				<input id="354b"  type="button" value="" style="" onmouseover="changeColor('354b'); cBordiTot('354', '353', '378', '354b', '353b', '355b', '330b', '378b');">
+				<input id="355b"  type="button" value="" style="" onmouseover="changeColor('355b'); cBordiTot('355', '354', '379', '355b', '354b', '356b', '331b', '379b');">
+				<input id="356b"  type="button" value="" style="" onmouseover="changeColor('356b'); cBordiTot('356', '355', '380', '356b', '355b', '357b', '332b', '380b');">
+				<input id="357b"  type="button" value="" style="" onmouseover="changeColor('357b'); cBordiTot('357', '356', '381', '357b', '356b', '358b', '333b', '381b');">
+				<input id="358b"  type="button" value="" style="" onmouseover="changeColor('358b'); cBordiTot('358', '357', '382', '358b', '357b', '359b', '334b', '382b');">
+				<input id="359b"  type="button" value="" style="" onmouseover="changeColor('359b'); cBordiTot('359', '358', '383', '359b', '358b', '360b', '335b', '383b');">
+				<input id="360b"  type="button" value="" style="" onmouseover="changeColor('360b'); cBordiR ('360', '359', '384', '360b', '359b', '336b', '384b');">
+				<input id="l15"  type="button" value="" style="" onmouseover="controlloEst('l15');"> <br>
+				
+				
+				<input id="r16"  type="button" value="" style="" onmouseover="controlloEst('r16');">
+				<input id="361b"  type="button" value="" style="" onmouseover="changeColor('361b'); cBordiBS ('361', '361b', '362b', '337b');">
+				<input id="362b"  type="button" value="" style="" onmouseover="changeColor('362b'); cBordiRigaU ('362', '361', '362b', '361b', '363b', '338b');">
+				<input id="363b"  type="button" value="" style="" onmouseover="changeColor('363b'); cBordiRigaU ('363', '362', '363b', '362b', '364b', '339b');">
+				<input id="364b"  type="button" value="" style="" onmouseover="changeColor('364b'); cBordiRigaU ('364', '363', '364b', '363b', '365b', '340b');">
+				<input id="365b"  type="button" value="" style="" onmouseover="changeColor('365b'); cBordiRigaU ('365', '364', '365b', '364b', '366b', '341b');">
+				<input id="366b"  type="button" value="" style="" onmouseover="changeColor('366b'); cBordiRigaU ('366', '365', '366b', '365b', '367b', '342b');">
+				<input id="367b"  type="button" value="" style="" onmouseover="changeColor('367b'); cBordiRigaU ('367', '366', '367b', '366b', '368b', '343b');">
+				<input id="368b"  type="button" value="" style="" onmouseover="changeColor('368b'); cBordiRigaU ('368', '367', '368b', '367b', '369b', '344b');">
+				<input id="369b"  type="button" value="" style="" onmouseover="changeColor('369b'); cBordiRigaU ('369', '368', '369b', '368b', '370b', '345b');">
+				<input id="370b"  type="button" value="" style="" onmouseover="changeColor('370b'); cBordiRigaU ('370', '369', '370b', '369b', '371b', '346b');">
+				<input id="371b"  type="button" value="" style="" onmouseover="changeColor('371b'); cBordiRigaU ('371', '370', '371b', '370b', '372b', '347b');">
+				<input id="372b"  type="button" value="" style="" onmouseover="changeColor('372b'); cBordiRigaU ('372', '371', '372b', '371b', '373b', '348b');">
+				<input id="373b"  type="button" value="" style="" onmouseover="changeColor('373b'); cBordiRigaU ('373', '372', '373b', '372b', '374b', '349b');">
+				<input id="374b"  type="button" value="" style="" onmouseover="changeColor('374b'); cBordiRigaU ('374', '373', '374b', '373b', '375b', '350b');">
+				<input id="375b"  type="button" value="" style="" onmouseover="changeColor('375b'); cBordiRigaU ('375', '374', '375b', '374b', '376b', '351b');">
+				<input id="376b"  type="button" value="" style="" onmouseover="changeColor('376b'); cBordiRigaU ('376', '375', '376b', '375b', '377b', '352b');">
+				<input id="377b"  type="button" value="" style="" onmouseover="changeColor('377b'); cBordiRigaU ('377', '376', '377b', '376b', '378b', '353b');">
+				<input id="378b"  type="button" value="" style="" onmouseover="changeColor('378b'); cBordiRigaU ('378', '377', '378b', '377b', '379b', '354b');">
+				<input id="379b"  type="button" value="" style="" onmouseover="changeColor('379b'); cBordiRigaU ('379', '378', '379b', '378b', '380b', '355b');">
+				<input id="380b"  type="button" value="" style="" onmouseover="changeColor('380b'); cBordiRigaU ('380', '379', '380b', '379b', '381b', '356b');">
+				<input id="381b"  type="button" value="" style="" onmouseover="changeColor('381b'); cBordiRigaU ('381', '380', '381b', '380b', '382b', '357b');">
+				<input id="382b"  type="button" value="" style="" onmouseover="changeColor('382b'); cBordiRigaU ('382', '381', '382b', '381b', '383b', '358b');">
+				<input id="383b"  type="button" value="" style="" onmouseover="changeColor('383b'); cBordiRigaU ('383', '382', '383b', '382b', '384b', '359b');">
+				<input id="384b"  type="button" value="" style="" onmouseover="changeColor('384b');">
+				<input id="l16"  type="button" value="" style="" onmouseover="controlloEst('l16');"> <br>
+				
+				
+				<input id="d1"  type="button" value="" style="" onmouseover="controlloEst('d1');">
+				<input id="d2"  type="button" value="" style="" onmouseover="controlloEst('d2');">
+				<input id="d3"  type="button" value="" style="" onmouseover="controlloEst('d3');">
+				<input id="d4"  type="button" value="" style="" onmouseover="controlloEst('d4');">
+				<input id="d5"  type="button" value="" style="" onmouseover="controlloEst('d5');">
+				<input id="d6"  type="button" value="" style="" onmouseover="controlloEst('d6');">
+				<input id="d7"  type="button" value="" style="" onmouseover="controlloEst('d7');">
+				<input id="d8"  type="button" value="" style="" onmouseover="controlloEst('d8');">
+				<input id="d9"  type="button" value="" style="" onmouseover="controlloEst('d9');">
+				<input id="d10"  type="button" value="" style="" onmouseover="controlloEst('d10');">
+				<input id="d11"  type="button" value="" style="" onmouseover="controlloEst('d11');">
+				<input id="d12"  type="button" value="" style="" onmouseover="controlloEst('d12');">
+				<input id="d13"  type="button" value="" style="" onmouseover="controlloEst('d13');">
+				<input id="d14"  type="button" value="" style="" onmouseover="controlloEst('d14');">
+				<input id="d15"  type="button" value="" style="" onmouseover="controlloEst('d15');">
+				<input id="d16"  type="button" value="" style="" onmouseover="controlloEst('d16');">
+				<input id="d17"  type="button" value="" style="" onmouseover="controlloEst('d17');">
+				<input id="d18"  type="button" value="" style="" onmouseover="controlloEst('d18');">
+				<input id="d19"  type="button" value="" style="" onmouseover="controlloEst('d19');">
+				<input id="d20"  type="button" value="" style="" onmouseover="controlloEst('d20');">
+				<input id="d21"  type="button" value="" style="" onmouseover="controlloEst('d21');">
+				<input id="d22"  type="button" value="" style="" onmouseover="controlloEst('d22');">
+				<input id="d23"  type="button" value="" style="" onmouseover="controlloEst('d23');">
+				<input id="d24"  type="button" value="" style="" onmouseover="controlloEst('d24');">
+				<input id="d25"  type="button" value="" style="" onmouseover="controlloEst('d25');">
+				<input id="d26"  type="button" value="" style="" onmouseover="controlloEst('d26');"> <br>
+				
+			</div>
+			<div class="fine"> <img class="imgFine" src="./immagini/ambiente/fine.png" alt="fine"> </div>
+		</div>
+		
+		<div align="left" class="divIndice"> <a href="./IndiceGiochi.html"><img class="indice" src="./immagini/indici_frecce/indici/verde.png" alt="indice"></a> </div>
+		<div align="center" class="divReset"> <a href="./n.27-labirinto.html"><img class="reset" src="./immagini/reset.png" alt="reset"></a> </div>
+		<div align="right" class="divAvanti"> <a href="./n.28-labirinto.html"><img class="avanti" src="./immagini/indici_frecce/frecce/verde/avanti_verde.png" alt="avanti"></a> </div>
+		<div align="left" class="divIndietro"> <a href="./n.26-labirinto.html"><img class="indietro" src="./immagini/indici_frecce/frecce/verde/indietro_verde.png" alt="indietro"></a> </div>
+		
+		
+		<div id="myModal" class="modal">
+		<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p class="popUp">Complimenti! Hai trovato la strada giusta! Chiudi la finestra e seleziona la freccia avanti per passare al prossimo gioco</p>
+				<div align="center"> <img src="./immagini/popUp_lui_felice.png" alt="popUp"> </div>
+			</div>
+		</div>
+
+
+		<div id="onda"> <img src="./immagini/ondeDefinitive/onde_piccole/onda_piccola_verde.jpg" alt="onda"> </div>
+		
+		<script>
+		var inputs = document.getElementsByTagName("input");
+		for (var i = 0; i < inputs.length; i++) {
+			$("#"+inputs[i].id).on('touchmove',function(evt){
+			  var touch = evt.originalEvent.touches[0];
+			  highlightHoveredObject(touch.clientX, touch.clientY);
+			});
+		}
+		
+		function highlightHoveredObject(x, y) {
+			$('input').each(function() {
+			  // check if is inside boundaries
+			  if (!(
+				  x <= $(this).offset().left || x >= $(this).offset().left + $(this).outerWidth() ||
+				  y <= $(this).offset().top  || y >= $(this).offset().top + $(this).outerHeight()
+			  )) {
+				document.getElementById($(this).attr("id")).onmouseover();
+			  }
+			});
+		}
+		
+		$("body").css("overflow", "hidden");
+		
+
+		</script>
+	</body>
+</html>
