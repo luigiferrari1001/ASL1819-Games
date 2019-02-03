@@ -1,0 +1,65 @@
+.cella{
+    font-family: sans-serif;
+    background-color: white;
+    border:1px solid black;
+    height:6vh;
+    width:7%;
+    text-align: center;
+    font-size:2vw;
+    float:left;
+    vertical-align: sub;
+}
+.num {
+    font-style:normal !important; 
+    padding-left: 0.15vw;
+    margin:0;
+    font-size:0.7vw;
+    text-align:left;
+    vertical-align: top;
+}
+
+.azzurra{
+    background-color: lightblue;
+    font-style:italic;
+}
+
+.nera{
+    background-color: black;
+    padding:4px white;
+}
+
+.top{
+    border-top:4px solid black;
+}
+
+.left{
+    border-left:4px solid black;
+}
+
+.right{
+    border-right:4px solid black;
+}
+
+.bottom{
+    border-bottom:4px solid black;
+}
+
+.selected{
+    background-color: #cccccc !important;
+}
+
+.test{
+    display: inline;
+}
+
+.marginTop{
+    margin-top: 3vh;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.italic{
+    font-style:italic;
+}

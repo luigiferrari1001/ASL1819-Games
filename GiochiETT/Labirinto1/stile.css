@@ -1,0 +1,25 @@
+.divTrasparente{
+    background-color: transparent;
+}
+
+.imgInizio{
+    width: 16.4% !important;
+    height: 12em;
+    content: url("./Vecchio/immagini/acqua/inizio.png");
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#mazeLocation {
+    position: relative;
+}
+
+.imgFine{
+    width: 16.4% !important;
+    height: 12em;
+    content: url("./Vecchio/immagini/acqua/fine.png");
+    position: absolute;
+    bottom:0;
+    right: 1.6%;
+}
